@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue:wght@300;400;500;600;700&display=swap');
+
+* {font-family: 'Bebas Neue';}
+
+a {text-decoration: none; 
+    color: #0096ff !important;
+     font-weight: 500;}
+
+a:hover {
+    color: #989d9b !important;
+    text-decoration: none;
+}
+
+ul {list-style-type: none;}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 5%;}
+
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
