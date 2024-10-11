@@ -1,7 +1,6 @@
 xlsxwriter
 pandas
 streamlit
-io
 sqlalchemy
 pymysql
 openpyxl
