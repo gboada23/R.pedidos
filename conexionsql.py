@@ -48,7 +48,7 @@ class MYSQL:
                         pedido AS nro_pedido,
                         familia,
                         descripcion,
-                        presentacion
+                        presentacion,
                         cantidad,
                         costo_dolar,
                         precio AS precio_dolar,
