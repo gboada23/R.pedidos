@@ -16,11 +16,9 @@ st.set_page_config(
     page_title=page_title,
     page_icon=page_icon,
     layout=layout)
-
 # CARGAMOS EL CSS
 # AÑADIMOS EL ESTILO
 css_file = "styles/main.css"
-
 with open(css_file) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 col1,  col2, col3 = st.columns((1,3,1))
@@ -108,9 +106,9 @@ if not df_filtered.empty:
     # Botón para descargar el DataFrame filtrado como archivo Excel
     excel_data = to_excel(df_filtered)
     st.download_button(
-        label="Descargar en Excel",
+        label="Descargar como Excel",
         data=excel_data,
-        file_name='datos_filtrados.xlsx',
+        file_name='datos_pedidos.xlsx',
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
 else:
