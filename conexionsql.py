@@ -47,6 +47,7 @@ class MYSQL:
                         comedor,
                         pedido AS nro_pedido,
                         familia,
+                        codigo,
                         descripcion,
                         presentacion,
                         cantidad,

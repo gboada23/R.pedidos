@@ -9,7 +9,7 @@ Mysql = MYSQL()
 df = Mysql.vista_pedidos()
 # CONFIGURAMOS LA PAGINA
 layout = "centered"
-page_title = "Rentabilidad | Camiones"
+page_title = "Rentabilidad | Productos"
 page_icon = "🚛"
 
 st.set_page_config(
@@ -26,12 +26,21 @@ with col2:
     # Mostramos el logo
     logo = st.image('assets/logo.png', width=350)
 # modifcamos el tipo de dato fecha to_datetime 
-df['fecha'] = pd.to_datetime(df['fecha'], format='%d-%m-%Y')
+df['fecha'] = pd.to_datetime(df['fecha'], format='%d-%m-%Y').dt.date
 
 # AGREGAMOS UNA COLUMNA CON LA SEMANA DEL AÑO
 df['semana'] = df['semana'].astype(int)
 # CREAMOS LA TABLA CON STREAMLIT
 df.sort_values(by=['fecha'],inplace=True)
+df['codigo'] = df['codigo'].str.strip()
+df['codigo'] = df['codigo'].astype(int)
+df['familia'] = df['familia'].str.strip()
+df['comedor'] = df['comedor'].str.strip()
+df['descripcion'] = df['descripcion'].str.strip()
+df['presentacion'] = df['presentacion'].str.strip()
+df['nro_pedido'] = df['nro_pedido'].str.strip()
+frio = ['CHARCUTERIA','PROTEICO','PRODUCTOS CONGELADOS']
+# Filtrar el DataFrame donde la columna 'familia' está en la lista 'frio'
 
 st.markdown("<h1 style='text-align: center;'>Tablero de Pedidos</h1>", unsafe_allow_html=True)
 
@@ -66,6 +75,7 @@ def filter_data():
         week_filter = st.selectbox("Semana", weeks, index=weeks.index(current_week))
         df_filtered = df[df['semana'] == week_filter]
 
+
     elif selected_week == 'Semana y comedor':
         week_filter = st.selectbox("Semana", weeks, index=weeks.index(current_week))
         comer_filter = st.selectbox("Comedor", df['comedor'].unique().tolist())
@@ -95,9 +105,15 @@ def filter_data():
 
     return df_filtered  # Retornar el DataFrame filtrado
 
-# Ejecutar el filtrado dentro del spinner
-with st.spinner('Filtrando datos...'):
-    df_filtered = filter_data()
+
+df_filtered = filter_data()
+
+# Checkbox para filtrar por productos fríos
+filtro_frios = st.checkbox("¿Desea ver solo los productos fríos?", value=False)
+
+# Filtrar los productos fríos si se selecciona el checkbox
+if filtro_frios:
+    df_filtered = df_filtered[df_filtered['familia'].isin(frio)]
 
 # Mostrar el DataFrame filtrado si no está vacío
 if not df_filtered.empty:
