@@ -54,7 +54,7 @@ class MYSQL:
                         costo_dolar,
                         precio AS precio_dolar,
                         cantidad * costo_dolar AS costo_total_dolar,
-                        cantidad * precio AS precio_total_dolar
+                        cantidad * precio AS precio_total_dolar,
                         observacion
                     FROM v_pedidos
                     WHERE fechapedido >= '2024-04-01'
