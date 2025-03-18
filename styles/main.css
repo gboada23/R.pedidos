@@ -1,23 +1,89 @@
-@import url('https://fonts.googleapis.com/css?family=Bebas+Neue:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-* {font-family: 'Bebas Neue';}
-
-a {text-decoration: none; 
-    color: #0096ff !important;
-     font-weight: 500;}
-
-a:hover {
-    color: #989d9b !important;
-    text-decoration: none;
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-ul {list-style-type: none;}
+/* Fondo con gradiente */
+body {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    color: white;
+    padding: 20px;
+}
 
-hr {
-    margin-top: 0px;
-    margin-bottom: 5%;}
+/* Links */
+a {
+    text-decoration: none;
+    color: #ffcc00 !important;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
 
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
+a:hover {
+    color: #ff6600 !important;
+}
 
+/* Encabezado */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+/* Contenedor de filtros */
+.stRadio > label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffcc00;
+}
+
+.stSelectbox {
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Botones */
+.stButton>button {
+    background-color: #ff6600;
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: background 0.3s ease-in-out;
+}
+
+.stButton>button:hover {
+    background-color: #cc5500;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background-color: #ffcc00;
+    color: black;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Ocultar menús */
+#MainMenu, footer, header {
+    visibility: hidden;
+}
