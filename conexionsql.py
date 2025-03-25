@@ -58,7 +58,7 @@ class MYSQL:
                         observacion,
                         finiquito
                     FROM v_pedidos
-                    WHERE fechapedido >= '2024-04-01'
+                    WHERE fechapedido >= '2025-01-02'
                     AND costo_dolar != 0
                     AND precio !=0 ;'''
         return self.fetch_data(query)
