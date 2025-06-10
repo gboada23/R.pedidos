@@ -59,8 +59,7 @@ class MYSQL:
                         finiquito
                     FROM v_pedidos
                     WHERE fechapedido >= '2025-01-02'
-                    AND costo_dolar != 0
-                    AND precio !=0 ;'''
+                    AND cerrado = 0 ;'''
         return self.fetch_data(query)
 
     def fetch_data(self, query):

@@ -31,7 +31,6 @@ with col2:
 st.markdown("<h1 style='text-align: center; color: black;'>Tablero de Pedidos</h1>", unsafe_allow_html=True)
 
 
-
 # Modificar formato de fecha
 df['fecha'] = pd.to_datetime(df['fecha'], format='%d-%m-%Y').dt.date
 df['codigo'] = df['codigo'].str.strip().astype(int)
