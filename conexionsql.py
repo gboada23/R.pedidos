@@ -42,22 +42,24 @@ class MYSQL:
 
     def vista_pedidos(self):
         query = '''SELECT 
-                        fechapedido as fecha, 
-                        semana,
-                        comedor,
-                        pedido AS nro_pedido,
-                        familia,
-                        codigo,
-                        descripcion,
-                        presentacion,
-                        cantidad,
-                        costo_dolar,
-                        precio AS precio_dolar,
-                        cantidad * costo_dolar AS costo_total_dolar,
-                        cantidad * precio AS precio_total_dolar,
-                        observacion,
-                        finiquito
-                    FROM v_pedidos
+                        v.fechapedido as fecha, 
+                        v.semana,
+                        v.comedor,
+                        v.pedido AS nro_pedido,
+                        v.familia,
+                        p.alterno as codigo,
+                        p.nombre as descripcion,
+                        v.presentacion,
+                        v.cantidad,
+                        v.costo_dolar,
+                        v.precio AS precio_dolar,
+                        v.cantidad * v.costo_dolar AS costo_total_dolar,
+                        v.cantidad * v.precio AS precio_total_dolar,
+                        v.observacion,
+                        v.finiquito
+                    FROM v_pedidos v
+                    inner join productos p 
+                    on p.alterno = v.codigo
                     WHERE fechapedido >= '2025-01-02'
                     AND cerrado = 0 ;'''
         return self.fetch_data(query)
@@ -74,4 +76,5 @@ class MYSQL:
         except SQLAlchemyError as e:
             st.error(f"Error al ejecutar la consulta: {e}")
             return None
+
 
