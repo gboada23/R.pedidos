@@ -60,7 +60,7 @@ class MYSQL:
                     FROM v_pedidos v
                     inner join productos p 
                     on p.alterno = v.codigo
-                    WHERE fechapedido >= '2025-01-02'
+                    WHERE fechapedido >= '2026-01-02'
                     AND cerrado = 0 ;'''
         return self.fetch_data(query)
 
@@ -76,5 +76,6 @@ class MYSQL:
         except SQLAlchemyError as e:
             st.error(f"Error al ejecutar la consulta: {e}")
             return None
+
 
 
