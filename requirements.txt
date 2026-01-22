@@ -4,4 +4,5 @@ streamlit
 sqlalchemy
 pymysql
 openpyxl
+altair==4.2.2
 mysql-connector-python
