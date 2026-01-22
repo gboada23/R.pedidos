@@ -66,16 +66,35 @@ class MYSQL:
 
     def fetch_data(self, query):
         try:
-            if self.engine:
-                # Ejecuta la consulta y convierte el resultado en un DataFrame
-                df = pd.read_sql(query, self.engine)
-                return df
-            else:
+            if not self.engine:
                 st.error("No se pudo establecer la conexión con la base de datos.")
                 return None
+    
+            df = pd.read_sql(query, self.engine)
+    
+            # ---- Normalización para Streamlit (evita Arrow/legacy bugs) ----
+    
+            # Columnas datetime: si MySQL las trae como object/string, conviértelas
+            for c in df.columns:
+                if "fecha" in c.lower():  # fecha, fechapedido, FECHA, etc.
+                    df[c] = pd.to_datetime(df[c], errors="coerce")
+    
+            # Evita dtypes raros tipo string[pyarrow] / large_string al mostrar
+            try:
+                df = df.convert_dtypes(dtype_backend="numpy_nullable")
+            except TypeError:
+                df = df.convert_dtypes()
+    
+            # Convierte cualquier columna "string" a object (más compatible con legacy)
+            for c in df.select_dtypes(include=["string"]).columns:
+                df[c] = df[c].astype(object)
+    
+            return df
+    
         except SQLAlchemyError as e:
             st.error(f"Error al ejecutar la consulta: {e}")
             return None
+
 
 
 
