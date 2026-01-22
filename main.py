@@ -32,13 +32,11 @@ st.markdown("<h1 style='text-align: center; color: black;'>Tablero de Pedidos</h
 
 
 # Modificar formato de fecha
-df['fecha'] = pd.to_datetime(df['fecha'], format='%d-%m-%Y').dt.date
-df['codigo'] = df['codigo'].str.strip().astype(int)
-df['familia'] = df['familia'].str.strip()
-df['comedor'] = df['comedor'].str.strip()
-df['descripcion'] = df['descripcion'].str.strip()
-df['presentacion'] = df['presentacion'].str.strip()
-df['nro_pedido'] = df['nro_pedido'].str.strip()
+df["fecha"] = pd.to_datetime(df["fecha"], errors="coerce")
+df["codigo"] = pd.to_numeric(df["codigo"].astype(str).str.strip(), errors="coerce").astype("Int64")
+cols_text = ["familia", "comedor", "descripcion", "presentacion", "nro_pedido"]
+for c in cols_text:
+    df[c] = df[c].astype(str).str.strip()
 
 # Definir familias frías
 frio = ['CHARCUTERIA', 'PROTEICO', 'PRODUCTOS CONGELADOS']
@@ -111,3 +109,4 @@ if not df_filtered.empty:
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 else:
     st.warning("No hay datos con los filtros seleccionados.")
+
